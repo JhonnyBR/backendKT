@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ProductoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -14,7 +16,13 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware(['isConected'])->group(function(){
+Route::middleware(['isConected'])->group(function () {
+    Route::post('product/create', [ProductoController::class, 'Create_product']);
+    Route::get('product/getTotal', [ProductoController::class, 'getTotal']);
+    Route::get('product/getStock/{stock?}', [ProductoController::class, 'getStock']);
+    Route::post('product/update/{stock?}/{id?}', [ProductoController::class, 'updateCant']);
+    Route::get('client/getClients', [ClientesController::class, 'getClients']);
+    Route::get('client/getclientbyid/{id?}', [ClientesController::class, 'getClientbyDocument']);
 });
 
 
