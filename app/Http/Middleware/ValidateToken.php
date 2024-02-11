@@ -15,7 +15,7 @@ class ValidateToken {
         $token = $request->header('Authorization');
         if(!$token){
             return response()->json([
-                'error' => 'Token nor provided'
+                'error' => 'Token not provided'
             ],401);
         }
         $token = str_replace('Bearer ', '', $token);
