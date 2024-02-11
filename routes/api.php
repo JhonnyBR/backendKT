@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,8 @@ Route::middleware(['isConected'])->group(function () {
     Route::get('product/getTotal', [ProductoController::class, 'getTotal']);
     Route::get('product/getStock/{stock?}', [ProductoController::class, 'getStock']);
     Route::post('product/update/{stock?}/{id?}', [ProductoController::class, 'updateCant']);
+    Route::get('client/getClients', [ClientesController::class, 'getClients']);
+    Route::get('client/getclientbyid/{id?}', [ClientesController::class, 'getClientbyDocument']);
 });
 
 
