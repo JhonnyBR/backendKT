@@ -36,6 +36,6 @@ class OrdenModel extends Model
     }
 
     public function orden_mepago(){
-        return $this->hasOne(MetodosPagoModel::class, 'idMetodosPago', 'MetodosPago_idMetodosPago');
+        return $this->hasOne(MetodosPagoModel::class, 'idMetodos', 'MetodosPago_idMetodosPago');
     }
 }

@@ -7,79 +7,23 @@ use Illuminate\Http\Request;
 
 class OrdenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function getOrders(){
+        return OrdenModel::with('orden_carrito')->with('orden_menvio')->with('orden_mepago')->get();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function createOrder(Request $request){
+        $data = [
+            'numero_orden' => $request['norden'] ?? null,
+            'Cliente_idCliente' => $request['idclient'] ?? null,
+            'Carrito_idCarrito' => $request['idcarrito'] ?? null,
+            'MetodosEnvio_idMetodosEnvio' => $request['menvios'] ?? null,
+            'MetodosPago_idMetodosPago' => $request['mepagos'] ?? null
+        ];
+        if(in_array(null, $data)){
+            return response()->json('Data invalida', 400);
+        }
+        $newOrden = OrdenModel::insertGetId($data);
+        return response()->json('Orden creada con ID '. $newOrden, 200);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\OrdenModel  $ordenModel
-     * @return \Illuminate\Http\Response
-     */
-    public function show(OrdenModel $ordenModel)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\OrdenModel  $ordenModel
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(OrdenModel $ordenModel)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OrdenModel  $ordenModel
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, OrdenModel $ordenModel)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\OrdenModel  $ordenModel
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(OrdenModel $ordenModel)
-    {
-        //
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\MetodosEnvioController;
 use App\Http\Controllers\MetodosPagoController;
+use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::middleware(['isConected'])->group(function () {
+    Route::get('user/getusers', [UserController::class, 'get_user']);
     Route::post('product/create', [ProductoController::class, 'Create_product']);
     Route::get('product/getTotal', [ProductoController::class, 'getTotal']);
     Route::get('product/getStock/{stock?}', [ProductoController::class, 'getStock']);
@@ -34,6 +36,8 @@ Route::middleware(['isConected'])->group(function () {
     Route::post('menvios/createmethod', [MetodosEnvioController::class, 'createMethod']);
     Route::get('mepagos/getmethods', [MetodosPagoController::class, 'getMethods']);
     Route::post('mepagos/createmethod', [MetodosPagoController::class, 'createMethod']);
+    Route::get('orders/getorders', [OrdenController::class, 'getOrders']);
+    Route::post('orders/create', [OrdenController::class, 'createOrder']);
 });
 
 
